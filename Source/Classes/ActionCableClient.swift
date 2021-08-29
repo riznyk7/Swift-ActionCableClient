@@ -422,7 +422,7 @@ extension ActionCableClient {
             switch(message.messageType) {
             case .unrecognized:
                 break
-            case .welcome:
+            case .welcome, .disconnect:
                 break
             case .ping:
                 if let callback = onPing {
@@ -491,9 +491,9 @@ extension ActionCableClient : CustomDebugStringConvertible {
     }
 }
 
-extension ActionCableClient : CustomPlaygroundQuickLookable {
-  public var customPlaygroundQuickLook: PlaygroundQuickLook {
-        return PlaygroundQuickLook.url(socket.currentURL.absoluteString)
+extension ActionCableClient : CustomPlaygroundDisplayConvertible {
+    public var playgroundDescription: Any {
+        return socket.currentURL.absoluteString
     }
 }
 
